@@ -1,0 +1,20 @@
+name: Deploy to ArgoCD
+
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create or Update ArgoCD Application
+        run: |
+          argocd app create my-app \
+            --project default
+            --repo https://github.com/vignesh-vicky-tech/repo14.git \
+            --path yaml-files \
+            --dest-server https://kubernetes.default.svc \
+            --dest-namespace default 
+      - name: Sync app
+        run: |
+          argocd app sync my-app
