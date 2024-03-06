@@ -1,9 +1,6 @@
 name: Deploy to ArgoCD
 
-on:
-  push:
-    branches:
-      - main
+
 
 jobs:
   deploy:
