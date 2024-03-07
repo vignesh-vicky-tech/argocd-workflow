@@ -56,6 +56,11 @@ jobs:
       #     KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
       #   with: 
       #     args: get pods
+      
+    - name: ArgoCD Login
+      run: |
+         argocd login 172.30.46.16 --username admin --password OJjZ1gAeWCh4tjC0
+
     - name: Create or Update ArgoCD Application
       run: |
           argocd app create my-app \
