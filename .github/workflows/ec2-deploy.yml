@@ -10,19 +10,19 @@ jobs:
     
 
     steps:
-    #   - name: Checkout Repository
-    #     uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    #   - name: Set up ArgoCD CLI
-    #     uses: clowdhaus/argo-cd-action/@main
-    #     with:
-    #       server: ${{ secrets.ARGOCD_SERVER }}
-    #       token: ${{ secrets.ARGOCD_TOKEN }}
-    #       insecure: true
+      - name: Set up ArgoCD CLI
+        uses: clowdhaus/argo-cd-action/@main
+        with:
+          server: ${{ secrets.ARGOCD_SERVER }}
+          token: ${{ secrets.ARGOCD_TOKEN }}
+          insecure: true
 
-    #   - name: Set up Kubernetes Config
-    #     run: echo ${{ secrets.KUBECONFIG }} | base64 -d > kubeconfig
-    #     shell: bash
+      - name: Set up Kubernetes Config
+        run: echo ${{ secrets.KUBECONFIG }} | base64 -d > kubeconfig
+        shell: bash
 
       # - name: Create or Update ArgoCD Application
       #   run: |
@@ -36,19 +36,19 @@ jobs:
       #     KUBECONFIG: kubeconfig
 
 
-    - uses: clowdhaus/argo-cd-action/@main
-      env:
-    # Only required for first step in job where API is called
-    # All subsequent setps in a job will not re-download the CLI
-        GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
-      with:
-       command: version
-       options: --client
-    - uses: clowdhaus/argo-cd-action/@main
-  # CLI has already been downloaded in prior step, no call to GitHub API
-      with:
-        command: version
-        options: --client
+  #   - uses: clowdhaus/argo-cd-action/@main
+  #     env:
+  #   # Only required for first step in job where API is called
+  #   # All subsequent setps in a job will not re-download the CLI
+  #       GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+  #     with:
+  #      command: version
+  #      options: --client
+  #   - uses: clowdhaus/argo-cd-action/@main
+  # # CLI has already been downloaded in prior step, no call to GitHub API
+  #     with:
+  #       command: version
+  #       options: --client
          
       # - uses: actions/checkout@v1
       # - uses: actions-hub/kubectl@master
