@@ -13,17 +13,17 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      # - name: Set up ArgoCD CLI
-      #   uses: clowdhaus/argo-cd-action/@main
-      #   with:
-      #     server: ${{ secrets.ARGOCD_SERVER }}
-      #     token: ${{ secrets.ARGOCD_TOKEN }}
-      #     insecure: true
+      - name: Set up ArgoCD CLI
+        uses: clowdhaus/argo-cd-action/@main
+        with:
+          server: ${{ secrets.ARGOCD_SERVER }}
+          token: ${{ secrets.ARGOCD_TOKEN }}
+          insecure: true
           
       - name: Debug ArgoCD Commands
         run: |
-          echo "${{ secrets.ARGOCD_SERVER }}"
           argocd version
+          argocd app lists
 
 
       # - name: Set up Kubernetes Config
