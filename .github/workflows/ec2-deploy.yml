@@ -7,7 +7,35 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    
+
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up ArgoCD CLI
+        uses: argoproj-labs/argocd-action@v3
+        with:
+          server: ${{ secrets.ARGOCD_SERVER }}
+          token: ${{ secrets.ARGOCD_TOKEN }}
+          insecure: true
+
+      - name: Set up Kubernetes Config
+        run: echo ${{ secrets.KUBECONFIG }} | base64 -d > kubeconfig
+        shell: bash
+
+      # - name: Create or Update ArgoCD Application
+      #   run: |
+      #     argocd app create my-app \
+      #       --repo https://github.com/yourusername/your-repo.git \
+      #       --path path/to/application \
+      #       --dest-server https://kubernetes.default.svc \
+      #       --dest-namespace my-namespace \
+      #       --upsert
+      #   env:
+      #     KUBECONFIG: kubeconfig
+
+
   #   - uses: clowdhaus/argo-cd-action/@main
   #     env:
   #   # Only required for first step in job where API is called
@@ -22,12 +50,12 @@ jobs:
   #       command: version
   #       options: --client
          
-      - uses: actions/checkout@v1
-      - uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
-        with:
-          args: get pods
+      # - uses: actions/checkout@v1
+      # - uses: actions-hub/kubectl@master
+      #   env:
+      #     KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+      #   with:
+      #     args: get pods
       # - name: Create or Update ArgoCD Application
       #   run: |
       #     argocd app create my-app \
