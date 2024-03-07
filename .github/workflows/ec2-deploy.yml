@@ -19,10 +19,11 @@ jobs:
           server: ${{ secrets.ARGOCD_SERVER }}
           token: ${{ secrets.ARGOCD_TOKEN }}
           insecure: true
+          
       - name: Debug ArgoCD Commands
         run: |
-          echo "ArgoCD Server: ${{ secrets.ARGOCD_SERVER }}"
-          echo "ArgoCD Token: ${{ secrets.ARGOCD_TOKEN }}"
+          echo "$server"
+          echo "$token"
           argocd version
 
 
