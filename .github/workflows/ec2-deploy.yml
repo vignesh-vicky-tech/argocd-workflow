@@ -13,12 +13,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      # - name: Set up ArgoCD CLI
-      #   uses: clowdhaus/argo-cd-action/@main
-      #   with:
-      #     server: ${{ secrets.ARGOCD_SERVER }}
-      #     token: ${{ secrets.ARGOCD_TOKEN }}
-      #     insecure: true
+      - name: Set up ArgoCD CLI
+        uses: clowdhaus/argo-cd-action/@main
+        with:
+          server: ${{ secrets.ARGOCD_SERVER }}
+          token: ${{ secrets.ARGOCD_TOKEN }}
+          insecure: true
 
       - uses: clowdhaus/argo-cd-action/@main
         env:
