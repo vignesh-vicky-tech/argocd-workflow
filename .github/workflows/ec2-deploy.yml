@@ -58,16 +58,16 @@ jobs:
   #       command: version
   #       options: --client
          
-      - uses: actions/checkout@v1
-      - uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
-        with: 
-          args: get pods
+      # - uses: actions/checkout@v1
+      # - uses: actions-hub/kubectl@master
+      #   env:
+      #     KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+      #   with: 
+      #     args: get pods
 
-      - name: Apply ArgoCD Application Manifest
-        run: |
-          kubectl apply -f https://github.com/vignesh-vicky-tech/argocd-apply.git
+      # - name: Apply ArgoCD Application Manifest
+      #   run: |
+      #     kubectl apply -f https://github.com/vignesh-vicky-tech/argocd-apply.git
       
       # - name: ArgoCD Login
          
