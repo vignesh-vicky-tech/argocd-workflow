@@ -40,7 +40,7 @@ jobs:
       env:
     # Only required for first step in job where API is called
     # All subsequent setps in a job will not re-download the CLI
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
       with:
        command: version
        options: --client
