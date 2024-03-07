@@ -27,9 +27,7 @@ jobs:
       - name: Apply ArgoCD Application Manifest
         run: |
           kubectl apply -f https://github.com/vignesh-vicky-tech/argocd-apply.git
-        env:
-          KUBECONFIG: ${{ secrets.KUBECONFIG }}
-
+        
       # - name: Create or Update ArgoCD Application
       #   run: |
       #     argocd app create my-app \
