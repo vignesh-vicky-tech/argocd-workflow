@@ -19,6 +19,12 @@ jobs:
           server: ${{ secrets.ARGOCD_SERVER }}
           token: ${{ secrets.ARGOCD_TOKEN }}
           insecure: true
+      - name: Debug ArgoCD Commands
+        run: |
+          echo "ArgoCD Server: $ARGOCD_SERVER"
+          echo "ArgoCD Token: $ARGOCD_TOKEN"
+          argocd version
+
 
       # - name: Set up Kubernetes Config
       #   run: echo ${{ secrets.KUBECONFIG }} | base64 -d > kubeconfig
