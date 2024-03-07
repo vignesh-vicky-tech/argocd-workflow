@@ -60,7 +60,8 @@ jobs:
     - name: ArgoCD Login
       run: |
          argocd login 172.30.46.16:32145 --username admin --password OJjZ1gAeWCh4tjC0
-
+         insecure: true
+      
     - name: Create or Update ArgoCD Application
       run: |
           argocd app create my-app \
