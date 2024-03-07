@@ -58,10 +58,10 @@ jobs:
       #     args: get pods
       
       - name: ArgoCD Login
+         
         run: |
-          argocd login 172.30.46.16:32145 --username admin --password OJjZ1gAeWCh4tjC0
-          insecure: true
-      
+          argocd login  ${{ secrets.ARGOCD_SERVER }} --username admin --password OJjZ1gAeWCh4tjC0
+        
       - name: Create or Update ArgoCD Application
         run: |
           argocd app create my-app \
