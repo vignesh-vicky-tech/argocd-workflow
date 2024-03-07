@@ -60,7 +60,7 @@ jobs:
       - name: ArgoCD Login
          
         run: |
-          argocd login 172.30.46.16:32145 --username admin --password OJjZ1gAeWCh4tjC0
+          argocd login https://172.30.46.16:32145 --username admin --password OJjZ1gAeWCh4tjC0
         
       - name: Create or Update ArgoCD Application
         run: |
