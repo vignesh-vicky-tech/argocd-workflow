@@ -5,8 +5,8 @@ on:
       name:
         description: 'Name of the EKS cluster'  
         required: true 
-      repoUrl:
-        description: 'RepoUrl'
+      Reponame:
+        description: 'Reponame'
         required: true
  
      
@@ -18,8 +18,8 @@ jobs:
         - name: Print Helloworld
           run: |
              echo "hello"
-             echo "${{ github.event.inputs.repoUrl }}" 
-             echo "${{ github.event.inputs.name }}" 
+             echo "${{ github.event.inputs.name}}" 
+             echo "https://github.com/vignesh-vicky-tech/${{ github.event.inputs.name }}.git" 
         
         - name: Checkout Repository
           uses: actions/checkout@v2
