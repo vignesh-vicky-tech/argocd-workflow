@@ -24,12 +24,12 @@ jobs:
         - name: Checkout Repository
           uses: actions/checkout@v2
 
-        - name: Set up ArgoCD CLI
-          uses: clowdhaus/argo-cd-action/@main
-          with:
-           server: ${{ secrets.ARGOCD_SERVER }}
-           token: ${{ secrets.ARGOCD_TOKEN }}
-           insecure: true
+        # - name: Set up ArgoCD CLI
+        #   uses: clowdhaus/argo-cd-action/@main
+        #   with:
+        #    server: ${{ secrets.ARGOCD_SERVER }}
+        #    token: ${{ secrets.ARGOCD_TOKEN }}
+        #    insecure: true
 
         - uses: clowdhaus/argo-cd-action/@main
           env:
@@ -45,9 +45,9 @@ jobs:
            command: version
            options: --client
           
-        - name: Debug ArgoCD Commands
-          run: |
-            argocd version
+        # - name: Debug ArgoCD Commands
+        #   run: |
+        #     argocd version
           
 
 
@@ -57,16 +57,16 @@ jobs:
 
       
         
-      # - name: Create or Update ArgoCD Application
-      #   run: |
-      #     argocd app create my-app \
-      #       --repo https://github.com/yourusername/your-repo.git \
-      #       --path path/to/application \
-      #       --dest-server https://kubernetes.default.svc \
-      #       --dest-namespace my-namespace \
-      #       --upsert
-      #   env:
-      #     KUBECONFIG: kubeconfig
+      - name: Create or Update ArgoCD Application
+        run: |
+          argocd app create my-app \
+            --repo https://github.com/yourusername/your-repo.git \
+            --path path/to/application \
+            --dest-server https://kubernetes.default.svc \
+            --dest-namespace my-namespace \
+            --upsert
+        env:
+          KUBECONFIG: kubeconfig
 
 
    
