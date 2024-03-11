@@ -1,6 +1,14 @@
 name: Deploy to ArgoCD
 on:
   workflow_dispatch: 
+    inputs:
+      clusterName:
+        description: 'Name of the EKS cluster'  
+        required: true 
+      repoUrl:
+        description: 'RepoUrl'
+        required: true
+ 
      
 
 jobs:
@@ -13,6 +21,8 @@ jobs:
         - name: Print Helloworld
           run: |
              echo "hello"
+             echo "${{ github.event.inputs.repoUrl }}" 
+             echo "${{ github.event.inputs.clusterName }}" 
   #     - name: Checkout Repository
   #       uses: actions/checkout@v2
 
