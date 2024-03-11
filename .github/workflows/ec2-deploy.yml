@@ -71,12 +71,12 @@ jobs:
 
    
          
-        - uses: actions/checkout@v1
-        - uses: actions-hub/kubectl@master
-          env:
-            KUBECONFIG: ${{ secrets.KUBECONFIG }}
-          with: 
-            args: get pods
+        # - uses: actions/checkout@v1
+        # - uses: actions-hub/kubectl@master
+        #   env:
+        #     KUBECONFIG: ${{ secrets.KUBECONFIG }}
+        #   with: 
+        #     args: get pods
 
         - name: Apply ArgoCD Application Manifest
           run: |
