@@ -80,7 +80,7 @@ jobs:
 
         - name: Apply ArgoCD Application Manifest
           run: |
-           kubectl apply -f https://github.com/vignesh-vicky-tech/argocd-apply/main/yaml-file/deploy.yaml
+           kubectl apply -f https://github.com/vignesh-vicky-tech/argocd-apply/blob/main/yaml-file/deploy.yaml
       
       # - name: ArgoCD Login
          
