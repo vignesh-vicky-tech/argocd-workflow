@@ -57,16 +57,16 @@ jobs:
 
       
         
-      - name: Create or Update ArgoCD Application
-        run: |
-          argocd app create my-app \
+        - name: Create or Update ArgoCD Application
+          run: |
+           argocd app create my-app \
             --repo https://github.com/yourusername/your-repo.git \
             --path path/to/application \
             --dest-server https://kubernetes.default.svc \
             --dest-namespace my-namespace \
             --upsert
-        env:
-          KUBECONFIG: kubeconfig
+          env:
+           KUBECONFIG: kubeconfig
 
 
    
