@@ -10,33 +10,36 @@ jobs:
     
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+        - name: Print Helloworld
+          run: |
+             echo "hello"
+  #     - name: Checkout Repository
+  #       uses: actions/checkout@v2
 
-      - name: Set up ArgoCD CLI
-        uses: clowdhaus/argo-cd-action/@main
-        with:
-          server: ${{ secrets.ARGOCD_SERVER }}
-          token: ${{ secrets.ARGOCD_TOKEN }}
-          insecure: true
+  #     - name: Set up ArgoCD CLI
+  #       uses: clowdhaus/argo-cd-action/@main
+  #       with:
+  #         server: ${{ secrets.ARGOCD_SERVER }}
+  #         token: ${{ secrets.ARGOCD_TOKEN }}
+  #         insecure: true
 
-      - uses: clowdhaus/argo-cd-action/@main
-        env:
-    # Only required for first step in job where API is called
-    # All subsequent setps in a job will not re-download the CLI
-         GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
-        with:
-          command: version
-          options: --client
-      - uses: clowdhaus/argo-cd-action/@main
-  # CLI has already been downloaded in prior step, no call to GitHub API
-        with:
-          command: version
-          options: --client
+  #     - uses: clowdhaus/argo-cd-action/@main
+  #       env:
+  #   # Only required for first step in job where API is called
+  #   # All subsequent setps in a job will not re-download the CLI
+  #        GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+  #       with:
+  #         command: version
+  #         options: --client
+  #     - uses: clowdhaus/argo-cd-action/@main
+  # # CLI has already been downloaded in prior step, no call to GitHub API
+  #       with:
+  #         command: version
+  #         options: --client
           
-      - name: Debug ArgoCD Commands
-        run: |
-          argocd version
+  #     - name: Debug ArgoCD Commands
+  #       run: |
+  #         argocd version
           
 
 
