@@ -31,19 +31,19 @@ jobs:
         #    token: ${{ secrets.ARGOCD_TOKEN }}
         #    insecure: true
 
-        - uses: clowdhaus/argo-cd-action/@main
-          env:
-    # Only required for first step in job where API is called
-    # All subsequent setps in a job will not re-download the CLI
-             GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
-          with:
-           command: version
-           options: --client
-        - uses: clowdhaus/argo-cd-action/@main
-  # # CLI has already been downloaded in prior step, no call to GitHub API
-          with:
-           command: version
-           options: --client
+  #       - uses: clowdhaus/argo-cd-action/@main
+  #         env:
+  #   # Only required for first step in job where API is called
+  #   # All subsequent setps in a job will not re-download the CLI
+  #            GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+  #         with:
+  #          command: version
+  #          options: --client
+  #       - uses: clowdhaus/argo-cd-action/@main
+  # # # CLI has already been downloaded in prior step, no call to GitHub API
+  #         with:
+  #          command: version
+  #          options: --client
           
         # - name: Debug ArgoCD Commands
         #   run: |
@@ -51,36 +51,36 @@ jobs:
           
 
 
-        - name: Set up Kubernetes Config
-          run: echo ${{ secrets.KUBECONFIG }} | base64 -d > kubeconfig
-          shell: bash
+        # - name: Set up Kubernetes Config
+        #   run: echo ${{ secrets.KUBECONFIG }} | base64 -d > kubeconfig
+        #   shell: bash
 
       
         
-        - name: Create or Update ArgoCD Application
-          run: |
-           argocd app create my-app \
-            --repo https://github.com/yourusername/your-repo.git \
-            --path path/to/application \
-            --dest-server https://kubernetes.default.svc \
-            --dest-namespace my-namespace \
-            --upsert
-          env:
-           KUBECONFIG: kubeconfig
+        # - name: Create or Update ArgoCD Application
+        #   run: |
+        #    argocd app create my-app \
+        #     --repo https://github.com/yourusername/your-repo.git \
+        #     --path path/to/application \
+        #     --dest-server https://kubernetes.default.svc \
+        #     --dest-namespace my-namespace \
+        #     --upsert
+        #   env:
+        #    KUBECONFIG: kubeconfig
 
 
    
          
-      # - uses: actions/checkout@v1
-      # - uses: actions-hub/kubectl@master
-      #   env:
-      #     KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
-      #   with: 
-      #     args: get pods
+        - uses: actions/checkout@v1
+        - uses: actions-hub/kubectl@master
+          env:
+            KUBECONFIG: ${{ secrets.KUBECONFIG }}
+          with: 
+            args: get pods
 
-      # - name: Apply ArgoCD Application Manifest
-      #   run: |
-      #     kubectl apply -f https://github.com/vignesh-vicky-tech/argocd-apply.git
+        - name: Apply ArgoCD Application Manifest
+          run: |
+           kubectl apply -f https://github.com/vignesh-vicky-tech/argocd-apply/main/yaml-file/deploy.yaml
       
       # - name: ArgoCD Login
          
