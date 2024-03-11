@@ -19,7 +19,7 @@ jobs:
           run: |
              echo "hello"
              echo "${{ github.event.inputs.name}}" 
-             echo "https://github.com/vignesh-vicky-tech/${{ github.event.inputs.name }}.git" 
+             echo "https://github.com/vignesh-vicky-tech/${{ github.event.inputs.Reponame }}.git" 
         
         - name: Checkout Repository
           uses: actions/checkout@v2
