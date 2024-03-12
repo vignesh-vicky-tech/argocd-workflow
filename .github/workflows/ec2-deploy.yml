@@ -29,7 +29,7 @@ jobs:
             sudo microk8s kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort"}}'
             sudo microk8s kubectl get svc -n argocd -o wide    
             hostname -I 
-            sleep 50
+            sleep 100
             
         # - name: Set up ArgoCD CLI
         #   uses: clowdhaus/argo-cd-action/@main
