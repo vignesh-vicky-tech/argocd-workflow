@@ -43,8 +43,8 @@ jobs:
             rm argocd-linux-amd64
 
             sudo microk8s kubectl config set-context --current --namespace=argocd
-            argocd login cd.argoproj.io --core
-            argocd version
+            sudo argocd login cd.argoproj.io --core
+            sudo argocd version
 
             
             
