@@ -43,9 +43,10 @@ jobs:
             rm argocd-linux-amd64
 
             sudo microk8s kubectl config set-context --current --namespace=argocd
+            echo "point1"
             sudo argocd login cd.argoproj.io --core
+            echo "point2"
             sudo argocd version
-
             
             
         # - name: Set up ArgoCD CLI
