@@ -37,8 +37,11 @@ jobs:
             bash install_docker_k8s.sh
             sudo microk8s kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort"}}'
             sudo microk8s kubectl get svc -n argocd -o wide    
-            hostname -I 
-            sleep 100
+            hostname -I
+            wget https://github.com/argoproj/argo-cd/releases/download/v2.3.3/argocd-linux-amd64 -O argocd
+            sudo argocd version
+            
+
             
             
         # - name: Set up ArgoCD CLI
