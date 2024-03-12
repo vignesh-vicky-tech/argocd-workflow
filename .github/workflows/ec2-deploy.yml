@@ -107,8 +107,8 @@ jobs:
         #   with: 
         #     args: get pods
         
-        - name: Update and apply kubernetes configuration files
-          uses: swdotcom/update-and-apply-kubernetes-configs@v1.3.0
+        # - name: Update and apply kubernetes configuration files
+        #   uses: swdotcom/update-and-apply-kubernetes-configs@v1.3.0
             
         - name: Apply ArgoCD Application Manifest
           run: |
