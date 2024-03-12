@@ -35,21 +35,20 @@ jobs:
         - name: Step 1
           run: |
             bash install_docker_k8s.sh
-            sudo microk8s kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort","nodeport": 32145}}'
+            sudo microk8s kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort", "ports": [{"nodePort": 32145, "port": 80}]}}'
+
             sudo microk8s kubectl get svc -n argocd -o wide    
             hostname -I
             curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
             sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
             rm argocd-linux-amd64
-            export PSWD=${ kubectl view-secret argocd-initial-admin-secret -n argocd -q }
+            export PSWD=$(kubectl view-secret argocd-initial-admin-secret -n argocd -q)
             echo "$PSWD"
-            export HOST=$(hostname -I | awk '{print $1}')
-            echo "$HOST"
-            sudo argocd login $HOST:32145 --username admin --password $PSWD
+            sudo argocd login 10.1.0.86:32145 --username admin --password $PSWD
 
             # sudo microk8s kubectl config set-context --current --namespace=argocd
             # echo "point1"
-             # sudo argocd login cd.argoproj.io --core
+            # sudo argocd login cd.argoproj.io --core
             # echo "point2"
             sudo argocd version
             
