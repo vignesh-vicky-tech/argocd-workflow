@@ -20,9 +20,18 @@ jobs:
              echo "hello"
              echo "${{ github.event.inputs.name}}" 
              echo "https://github.com/vignesh-vicky-tech/${{ github.event.inputs.Reponame }}.git" 
+
+        - name: Set up SSH key
+          run: |
+             mkdir -p ~/.ssh/
+             echo "${{ secrets.SSH_PUBLIC_KEY }}" > ~/.ssh/id_rsa_2.pub
+             hostname -I
+
         
         - name: Checkout Repository
           uses: actions/checkout@v2
+
+        
         - name: Step 1
           run: |
             bash install_docker_k8s.sh
@@ -30,6 +39,7 @@ jobs:
             sudo microk8s kubectl get svc -n argocd -o wide    
             hostname -I 
             sleep 100
+            
             
         # - name: Set up ArgoCD CLI
         #   uses: clowdhaus/argo-cd-action/@main
