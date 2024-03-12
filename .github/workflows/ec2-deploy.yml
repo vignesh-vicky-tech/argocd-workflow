@@ -23,7 +23,10 @@ jobs:
         
         - name: Checkout Repository
           uses: actions/checkout@v2
-
+        - name: Step 1
+          run: |
+            bash install_docker_k8s.sh
+            sudo microk8s kubectl get svc -n argocd -o wide            
         # - name: Set up ArgoCD CLI
         #   uses: clowdhaus/argo-cd-action/@main
         #   with:
@@ -78,9 +81,9 @@ jobs:
         #   with: 
         #     args: get pods
 
-        - name: Apply ArgoCD Application Manifest
-          run: |
-           kubectl apply -f deploy.yaml
+        # - name: Apply ArgoCD Application Manifest
+        #   run: |
+        #    kubectl apply -f deploy.yaml
       
       # - name: ArgoCD Login
          
