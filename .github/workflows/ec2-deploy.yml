@@ -26,24 +26,32 @@ jobs:
         #      mkdir -p ~/.ssh/
         #      echo "${{ secrets.SSH_PUBLIC_KEY }}" > ~/.ssh/id_rsa_2.pub
         #      hostname -I
-
+        
         
         - name: Checkout Repository
           uses: actions/checkout@v2
 
+        - name: executing remote ssh commands using password
+          uses: appleboy/ssh-action@v1.0.3
+          with:
+            host: ${{ secrets.HOST }}
+            username: ${{ secrets.USERNAME }}
+            password: ${{ secrets.PASSWORD }}
+            port: ${{ secrets.PORT }}
+            script: whoami
         
-        - name: Step 1
-          run: |
-            bash install_docker_k8s.sh
-            sudo microk8s kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort", "ports": [{"nodePort": 32145, "port": 80}]}}'
+        # - name: Step 1
+        #   run: |
+        #     bash install_docker_k8s.sh
+        #     sudo microk8s kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "NodePort", "ports": [{"nodePort": 32145, "port": 80}]}}'
 
-            sudo microk8s kubectl get svc -n argocd -o wide    
-            hostname -I
-            curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
-            sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
-            rm argocd-linux-amd64
-            sudo argocd version
-            bash argocd.sh
+        #     sudo microk8s kubectl get svc -n argocd -o wide    
+        #     hostname -I
+        #     curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+        #     sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
+        #     rm argocd-linux-amd64
+        #     sudo argocd version
+        #     bash argocd.sh
             # export PSWD=$(sudo microk8s kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)
             # echo "$PSWD"
             # sudo argocd login 10.1.0.86:32145 --username admin --password $PSWD
