@@ -37,7 +37,7 @@ jobs:
             host: ${{ secrets.HOST }}
             username: ${{ secrets.USERNAME }}
             password: ${{ secrets.PASSWORD }}
-            key: ${{ secrets.SSH_PRIVATE_KEY }}
+            key: ${{ secrets.SSH_PUBLIC_KEY }}
             port: ${{ secrets.PORT }}
             script: whoami
         
