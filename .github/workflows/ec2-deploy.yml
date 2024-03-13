@@ -26,20 +26,29 @@ jobs:
         #      mkdir -p ~/.ssh/
         #      echo "${{ secrets.SSH_PUBLIC_KEY }}" > ~/.ssh/id_rsa_2.pub
         #      hostname -I
-        
-        
-        - name: Checkout Repository
-          uses: actions/checkout@v2
+        - name: Set up SSH key
+          run: |
+           mkdir -p ~/.ssh/
+           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+           chmod 600 ~/.ssh/id_rsa
 
-        - name: executing remote ssh commands using password
-          uses: appleboy/ssh-action@v1.0.3
-          with:
-            host: ${{ secrets.HOST }}
-            username: ${{ secrets.USERNAME }}
-            password: ${{ secrets.PASSWORD }}
-            key: ${{ secrets.SSH_PUBLIC_KEY }}
-            port: ${{ secrets.PORT }}
-            script: whoami
+        - name: SSH into VM
+          run: |
+           # ssh -v -i ~/.ssh/id_rsa ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}}
+             ssh -i ~/.ssh/id_rsa ubuntu@${{secrets.SSH_HOST}} "sudo argocd app create guestbook --repo https://github.com/argoproj/argocd-example-apps.git --path guestbook --dest-server https://kubernetes.default.svc --dest-namespace default "
+        
+        # - name: Checkout Repository
+        #   uses: actions/checkout@v2
+
+        # - name: executing remote ssh commands using password
+        #   uses: appleboy/ssh-action@v1.0.3
+        #   with:
+        #     host: ${{ secrets.HOST }}
+        #     username: ${{ secrets.USERNAME }}
+        #     password: ${{ secrets.PASSWORD }}
+        #     key: ${{ secrets.SSH_PUBLIC_KEY }}
+        #     port: ${{ secrets.PORT }}
+        #     script: whoami
         
         # - name: Step 1
         #   run: |
