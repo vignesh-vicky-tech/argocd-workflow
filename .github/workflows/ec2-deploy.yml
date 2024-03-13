@@ -39,11 +39,11 @@ jobs:
 
             sudo microk8s kubectl get svc -n argocd -o wide    
             hostname -I
+            curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+            sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
+            rm argocd-linux-amd64
+            sudo argocd version
             bash argocd.sh
-            # curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
-            # sudo install -m 555 argocd-linux-amd64 /usr/local/bin/argocd
-            # rm argocd-linux-amd64
-            # sudo argocd version
             # export PSWD=$(sudo microk8s kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)
             # echo "$PSWD"
             # sudo argocd login 10.1.0.86:32145 --username admin --password $PSWD
@@ -111,9 +111,9 @@ jobs:
         # - name: Update and apply kubernetes configuration files
         #   uses: swdotcom/update-and-apply-kubernetes-configs@v1.3.0
             
-        - name: Apply ArgoCD Application Manifest
-          run: |
-            sudo microk8s kubectl apply -f deploy.yaml
+        # - name: Apply ArgoCD Application Manifest
+        #   run: |
+        #     sudo microk8s kubectl apply -f deploy.yaml
       
       # - name: ArgoCD Login
          
